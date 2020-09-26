@@ -4,7 +4,14 @@ A media player to execute the medias from your local network (LAN) and control f
 
 ### Roadmap
 
-- [ ] Player interface
-- [ ] Control the player from another device
+- [x] Player and Controller comunication
+- [x] Controller actions
+- [ ] Change media from controller
+- [ ] Gallery of medias
+- [ ] Change media from gallery
 - [ ] Add medias folders path
 - [ ] Read medias from added folders
+- [ ] Controller design
+- [ ] Player design
+- [ ] Authentication on controller and player
+- [ ] Controll only the authenticated player
