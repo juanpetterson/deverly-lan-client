@@ -1,4 +1,12 @@
 {
-  "name": "DLCMobile",
-  "displayName": "DLCMobile"
+  "name": "video-test",
+  "displayName": "video-test",
+  "expo": {
+    "name": "video-test",
+    "slug": "video-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
 }

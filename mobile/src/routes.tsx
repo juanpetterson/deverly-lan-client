@@ -5,7 +5,7 @@ import PlayerPage from './pages/PlayerPage';
 
 const Stack = createStackNavigator();
 
-function Routes() {
+function Routes(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator>

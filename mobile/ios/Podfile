@@ -1,19 +1,14 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 platform :ios, '10.0'
 
-target 'DLCMobile' do
+target 'videotest' do
+  use_unimodules!
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
-
-  pod 'react-native-video', :path => '../node_modules/react-native-video'
-
-  target 'DLCMobileTests' do
-    inherit! :complete
-    # Pods for testing
-  end
 
   # Enables Flipper.
   #
@@ -22,14 +17,5 @@ target 'DLCMobile' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
-  end
-end
-
-target 'DLCMobile-tvOS' do
-  # Pods for DLCMobile-tvOS
-
-  target 'DLCMobile-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
   end
 end

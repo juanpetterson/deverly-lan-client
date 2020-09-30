@@ -1,9 +1,10 @@
-import React, { useEffect, forwardRef, useState } from 'react';
-import { Text, View } from 'react-native';
-import Video from 'react-native-video';
+import React, { useEffect, forwardRef } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Asset } from 'expo';
+import { Video } from 'expo-av';
 
 interface PlayerProps {
-  currentMedia: any;
+  currentMedia: Asset;
   state: PlayerState;
 }
 
@@ -17,13 +18,24 @@ const INITIAL_STATE: PlayerState = {
 
 const Player: React.ForwardRefRenderFunction<Video, PlayerProps> = (
   { currentMedia, state = INITIAL_STATE },
-  ref,
+  ref
 ) => {
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   return (
-    <View>
-      <Video ref={ref} source={currentMedia} paused={state.paused} resizeMode="contain" />
+    <View style={StyleSheet.absoluteFill}>
+      <Video
+        ref={ref}
+        source={currentMedia}
+        resizeMode="contain"
+        shouldPlay
+        isLooping
+        useNativeControls
+        style={StyleSheet.absoluteFill}
+      />
     </View>
   );
 };
-
 export default forwardRef(Player);
