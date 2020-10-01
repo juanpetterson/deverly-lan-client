@@ -29,4 +29,22 @@ io.on('connection', function (socket) {
 
     io.emit('controller-play-pause', 'from server');
   });
+
+  socket.on('controller-stop', data => {
+    console.log(data);
+
+    io.emit('controller-stop', 'from server');
+  });
+
+  socket.on('controller-back', data => {
+    console.log(data);
+
+    io.emit('controller-back', 'from server');
+  });
+
+  socket.on('controller-forward', data => {
+    console.log(data);
+
+    io.emit('controller-forward', 'from server');
+  });
 });
