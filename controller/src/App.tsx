@@ -13,14 +13,6 @@ const INITIAL_STATE: State = {
 const App: React.FC = () => {
   const [state, setState] = useState(INITIAL_STATE);
 
-  useEffect(() => {
-    socket.on('player-play', () => {
-      const newState = { ...state };
-      newState.paused = !newState.paused;
-      setState(newState);
-    });
-  }, []);
-
   const handleAction = (action: string) => {
     socket.emit(`controller-${action}`, 'play pressed');
 
@@ -37,6 +29,7 @@ const App: React.FC = () => {
       <button onClick={() => handleAction('stop')}>Stop</button>
       <button onClick={() => handleAction('back')}>Back</button>
       <button onClick={() => handleAction('forward')}>Forward</button>
+      <button onClick={() => handleAction('change-media')}>Toggle Media</button>
     </div>
   );
 };
