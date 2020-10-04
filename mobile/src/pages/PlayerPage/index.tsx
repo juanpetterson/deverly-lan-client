@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 import { Video } from 'expo-av';
 
 import Player from '../../components/Player';
-import media from '../../assets/medias/suits.mp4';
 import { VideoStatus } from '../../components/Player/types.interface';
 
 const socket = io(`http://10.0.3.2:5000`, {
@@ -13,7 +12,7 @@ const socket = io(`http://10.0.3.2:5000`, {
 
 const PlayerPage: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentMedia, setCurrentMedia] = useState(media);
+  const [currentMedia, setCurrentMedia] = useState('suits');
 
   const playerRef = useRef<Video>(null);
   useEffect(() => {

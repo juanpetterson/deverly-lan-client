@@ -1,10 +1,9 @@
 import React, { forwardRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Asset } from 'expo';
 import { Video } from 'expo-av';
 
 interface PlayerProps {
-  currentMedia: Asset;
+  currentMedia: string;
 }
 
 const Player: React.ForwardRefRenderFunction<Video, PlayerProps> = (
@@ -15,7 +14,10 @@ const Player: React.ForwardRefRenderFunction<Video, PlayerProps> = (
     <View style={StyleSheet.absoluteFill}>
       <Video
         ref={ref}
-        source={currentMedia}
+        source={{
+          uri: `http://10.0.3.2:5000/api/v1/video?media=${currentMedia}`,
+        }}
+        // source={currentMedia}
         resizeMode="contain"
         shouldPlay
         isLooping
