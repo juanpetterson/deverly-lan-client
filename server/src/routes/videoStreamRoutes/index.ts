@@ -1,12 +1,12 @@
-const express = require("express");
-const fs = require("fs");
+import express from 'express';
+import fs from 'fs';
+
 const router = express.Router();
 
-router.get("/v1/video", (req, res) => {
+router.get('/v1/video', (req, res) => {
   try {
     // get the requested media name
-    const mediaName = req.query.media;
-    const path = `src/assets/${mediaName}.mp4`;
+    const path = String(req.query.media);
 
     // check if file path exists
     if (fs.existsSync(path)) {
@@ -14,25 +14,25 @@ router.get("/v1/video", (req, res) => {
       const stat = fs.statSync(path);
 
       const fileSize = stat.size;
-      const range = req.headers.range;
+      const { range } = req.headers;
       if (range) {
-        const parts = range.replace(/bytes=/, "").split("-");
+        const parts = range.replace(/bytes=/, '').split('-');
         const start = parseInt(parts[0], 10);
         const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
         const chunksize = end - start + 1;
         const file = fs.createReadStream(path, { start, end });
         const head = {
-          "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-          "Accept-Ranges": "bytes",
-          "Content-Length": chunksize,
-          "Content-Type": "video/mp4",
+          'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+          'Accept-Ranges': 'bytes',
+          'Content-Length': chunksize,
+          'Content-Type': 'video/mp4',
         };
         res.writeHead(206, head);
         file.pipe(res);
       } else {
         const head = {
-          "Content-Length": fileSize,
-          "Content-Type": "video/mp4",
+          'Content-Length': fileSize,
+          'Content-Type': 'video/mp4',
         };
         res.writeHead(200, head);
         fs.createReadStream(path).pipe(res);
@@ -43,4 +43,4 @@ router.get("/v1/video", (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
