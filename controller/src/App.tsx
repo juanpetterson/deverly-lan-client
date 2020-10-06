@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import io from 'socket.io-client';
+import Gallery from './components/Gallery';
 const socket = io('http://localhost:5000');
 
 interface State {
@@ -25,11 +26,16 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <button onClick={() => handleAction('play-pause')}>{state.paused ? 'Play' : 'Pause'}</button>
-      <button onClick={() => handleAction('stop')}>Stop</button>
-      <button onClick={() => handleAction('back')}>Back</button>
-      <button onClick={() => handleAction('forward')}>Forward</button>
-      <button onClick={() => handleAction('change-media')}>Toggle Media</button>
+      <div>
+        <button onClick={() => handleAction('play-pause')}>
+          {state.paused ? 'Play' : 'Pause'}
+        </button>
+        <button onClick={() => handleAction('stop')}>Stop</button>
+        <button onClick={() => handleAction('back')}>Back</button>
+        <button onClick={() => handleAction('forward')}>Forward</button>
+        <button onClick={() => handleAction('change-media')}>Toggle Media</button>
+      </div>
+      <Gallery />
     </div>
   );
 };
