@@ -6,7 +6,7 @@ interface IMedia {
 }
 
 export const getMediasFromPath = async (
-  path = 'd:\\medias'
+  path = 'e:\\medias'
 ): Promise<IMedia[]> => {
   const pathMedias = await fs.readdir(path);
 
