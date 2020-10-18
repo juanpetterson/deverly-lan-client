@@ -15,10 +15,9 @@ const Player: React.ForwardRefRenderFunction<Video, PlayerProps> = (
       <Video
         ref={ref}
         source={{
-          uri: `http://10.0.3.2:5000/api/v1/video?media=${currentMedia}`,
+          uri: `http://10.0.2.2:5000/api/v1/video?media=${currentMedia}`,
         }}
-        // source={currentMedia}
-        resizeMode="contain"
+        resizeMode="stretch"
         shouldPlay
         isLooping
         useNativeControls

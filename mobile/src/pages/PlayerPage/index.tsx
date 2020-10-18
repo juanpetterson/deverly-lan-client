@@ -6,9 +6,14 @@ import { Video } from 'expo-av';
 import Player from '../../components/Player';
 import { VideoStatus } from '../../components/Player/types.interface';
 
-const socket = io(`http://10.0.3.2:5000`, {
+const socket = io(`http://10.0.2.2:5000`, {
   query: { user: 'logged user' },
 });
+
+interface IMedia {
+  path: string;
+  fileName: string;
+}
 
 const PlayerPage: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -40,6 +45,10 @@ const PlayerPage: React.FC = () => {
       const status = (await playerRef.current?.getStatusAsync()) as VideoStatus;
 
       await playerRef.current?.setPositionAsync(status.positionMillis + 10000);
+    });
+
+    socket.on('controller-media-change', async (data: IMedia) => {
+      setCurrentMedia(data.path);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
