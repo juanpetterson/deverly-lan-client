@@ -7,10 +7,10 @@ A media player to execute the medias from your local network (LAN) and control f
 - [x] Player and Controller comunication
 - [x] Controller actions
 - [x] Stream media from server
-- [ ] Read media files from folder
-- [ ] Change media from controller
-- [ ] Gallery of medias
-- [ ] Change media from gallery
+- [x] Read media files from folder
+- [x] Change media from controller
+- [x] Gallery of medias
+- [x] Change media from gallery
 - [ ] Add medias folders path
 - [ ] Read medias from added folders
 - [ ] Controller design
