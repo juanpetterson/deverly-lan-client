@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcons from 'react-native-vector-icons/Feather';
 
 import PlayerPage from './pages/PlayerPage';
+import Gallery from './pages/Gallery';
 
 const Tab = createMaterialBottomTabNavigator();
-
-const EmptyComponent = () => {
-  return <Text>EmptyComponent</Text>;
-};
 
 function Routes(): JSX.Element {
   return (
@@ -34,7 +30,7 @@ function Routes(): JSX.Element {
         />
         <Tab.Screen
           name="Search"
-          component={EmptyComponent}
+          component={Gallery}
           options={{
             tabBarLabel: 'Search',
             tabBarIcon: ({ color }) => (

@@ -1,14 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
-import io from 'socket.io-client';
 import { Video } from 'expo-av';
 
+import socket from '../../services/websockets';
 import Player from '../../components/Player';
 import { VideoStatus } from '../../components/Player/types.interface';
-
-const socket = io(`http://10.0.2.2:5000`, {
-  query: { user: 'logged user' },
-});
 
 interface IMedia {
   path: string;
@@ -50,7 +46,6 @@ const PlayerPage: React.FC = () => {
     socket.on('controller-media-change', async (data: IMedia) => {
       setCurrentMedia(data.path);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
