@@ -5,16 +5,17 @@ import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-import com.facebook.react.GoogleCastActivity;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+import com.google.android.gms.cast.framework.CastContext;
 
 import expo.modules.splashscreen.singletons.SplashScreen;
 import expo.modules.splashscreen.SplashScreenImageResizeMode;
 
-public class MainActivity extends GoogleCastActivity  {
+public class MainActivity extends ReactActivity  {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    CastContext.getSharedInstance(this);
     // SplashScreen.show(...) has to be called after super.onCreate(...)
     // Below line is handled by '@expo/configure-splash-screen' command and it's discouraged to modify it manually
     SplashScreen.show(this, SplashScreenImageResizeMode.CONTAIN, ReactRootView.class, false);

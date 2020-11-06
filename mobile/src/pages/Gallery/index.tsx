@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View } from 'react-native';
+import GoogleCast, { CastButton } from 'react-native-google-cast';
 import MediaItem from '../../components/MediaItem/MediaItem';
 import IMedia from '../../models/media.interface';
 
@@ -11,6 +12,8 @@ const Gallery: React.FC = () => {
   const [currentMedias, setCurrentMedias] = useState<IMedia[]>([]);
 
   useEffect(() => {
+    GoogleCast.showCastDialog();
+
     const loadMedias = async () => {
       const { data } = await mediasService.getAvailableMedias();
 
@@ -28,6 +31,7 @@ const Gallery: React.FC = () => {
   return (
     <Container>
       <Text>Gallery</Text>
+      <CastButton style={{ width: 30, height: 30 }} />
       <View>
         {currentMedias &&
           currentMedias.map((media) => {
