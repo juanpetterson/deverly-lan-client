@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb-typescript-prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/style-prop-object": 0
+  }
+}
