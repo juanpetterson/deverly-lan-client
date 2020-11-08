@@ -1,4 +1,4 @@
-import { IMedia } from '../models/media.interface';
+import IMedia from '../models/media.interface';
 import service from './service';
 
 export default {
