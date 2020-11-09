@@ -10,7 +10,7 @@ export const CategoryContainer = styled.TouchableOpacity`
   margin-right: 10px;
 `;
 export const CategoryImage = styled.Image`
-  width: 130;
+  width: 130px;
   height: 98px;
 `;
 

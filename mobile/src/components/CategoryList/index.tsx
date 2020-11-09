@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'react-native';
 
 import IMedia from '../../models/media.interface';
 import DefaultThumbnail from '../../../assets/default-thumbnail.jpg';
@@ -8,15 +7,16 @@ import { List, CategoryContainer, CategoryImage, CategoryName } from './styles';
 
 interface ListProps {
   data: IMedia[];
+  onClickItem: (media: IMedia) => void;
 }
 
 interface ItemProps {
   item: IMedia;
 }
 
-const CategoryList: React.FC<ListProps> = ({ data = [] }) => {
+const CategoryList: React.FC<ListProps> = ({ data = [], onClickItem }) => {
   const CategoryItem: React.FC<ItemProps> = ({ item }) => (
-    <CategoryContainer>
+    <CategoryContainer onPress={() => onClickItem(item)}>
       <CategoryImage source={DefaultThumbnail} />
       <CategoryName numberOfLines={1}>{item.fileName}</CategoryName>
     </CategoryContainer>
