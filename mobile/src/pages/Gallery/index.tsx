@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import GoogleCast, { CastButton } from 'react-native-google-cast';
-import MediaItem from '../../components/MediaItem/MediaItem';
-import IMedia from '../../models/media.interface';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+// import GoogleCast, { CastButton } from 'react-native-google-cast';
 
 import socket from '../../services/websockets';
 import mediasService from '../../services/mediasService';
 
+import IMedia from '../../models/media.interface';
 import Header from '../../components/Header';
 import Heading from '../../components/Heading';
 import Title from '../../components/Title';
 import CategoryList from '../../components/CategoryList';
 
-import { Wrapper, Container, Main } from './styles';
+import { Wrapper, Container } from './styles';
 
 interface Item {
   key: string;
@@ -21,6 +21,7 @@ interface Item {
 }
 
 const Gallery: React.FC = () => {
+  const navigation = useNavigation();
   const [currentMedias, setCurrentMedias] = useState<IMedia[]>([]);
 
   useEffect(() => {
@@ -35,6 +36,11 @@ const Gallery: React.FC = () => {
     loadMedias();
   }, []);
 
+  const handleMediaClick = (media: IMedia) => {
+    socket.emit('controller-media-change', media);
+    navigation.navigate('Player');
+  };
+
   const { data, indexes } = useMemo(() => {
     const items: Item[] = [
       {
@@ -48,7 +54,9 @@ const Gallery: React.FC = () => {
       },
       {
         key: 'C1',
-        render: () => <CategoryList data={currentMedias} />,
+        render: () => (
+          <CategoryList data={currentMedias} onClickItem={handleMediaClick} />
+        ),
       },
       {
         key: 'LIVE_CHANNELS',
@@ -57,7 +65,9 @@ const Gallery: React.FC = () => {
       },
       {
         key: 'C2',
-        render: () => <CategoryList data={currentMedias} />,
+        render: () => (
+          <CategoryList data={currentMedias} onClickItem={handleMediaClick} />
+        ),
       },
       {
         key: 'CONTINUE_WATCHING',
@@ -66,7 +76,9 @@ const Gallery: React.FC = () => {
       },
       {
         key: 'C3',
-        render: () => <CategoryList data={currentMedias} />,
+        render: () => (
+          <CategoryList data={currentMedias} onClickItem={handleMediaClick} />
+        ),
       },
       {
         key: 'OFFLINE_CHANNELS',
@@ -75,56 +87,35 @@ const Gallery: React.FC = () => {
       },
       {
         key: 'C4',
-        render: () => <CategoryList data={currentMedias} />,
+        render: () => (
+          <CategoryList data={currentMedias} onClickItem={handleMediaClick} />
+        ),
       },
     ];
 
     // indexes of the title elements
-    // eslint-disable-next-line no-shadow
-    const indexes: number[] = [];
+    const titleIndexes: number[] = [];
 
-    items.forEach((item, index) => item.isTitle && indexes.push(index));
+    items.forEach((item, index) => item.isTitle && titleIndexes.push(index));
 
     return {
       data: items,
-      indexes,
+      indexes: titleIndexes,
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMedias]);
-
-  // const handleMediaClick = (media: IMedia) => {
-  //   console.log(media);
-  //   socket.emit('controller-media-change', media);
-  // };
 
   return (
     <Wrapper>
       <Container>
         <Header />
-        <Main>
-          <FlatList<Item>
-            data={data}
-            renderItem={({ item }) => item.render()}
-            keyExtractor={(item) => item.key}
-            stickyHeaderIndices={indexes}
-            // Refresh Effect
-            // onRefresh={() => {}}
-            refreshing={false}
-          />
-        </Main>
-        <Text style={{ color: 'white' }}>Gallery</Text>
+        <FlatList<Item>
+          data={data}
+          renderItem={({ item }) => item.render()}
+          keyExtractor={(item) => item.key}
+          stickyHeaderIndices={indexes}
+        />
         {/* <CastButton style={{ width: 30, height: 30 }} /> */}
-        {/* <View>
-          {currentMedias &&
-            currentMedias.map((media) => {
-              return (
-                <MediaItem
-                  handleMediaClick={() => handleMediaClick(media)}
-                  key={media.fileName}
-                  media={media}
-                />
-              );
-            })}
-        </View> */}
       </Container>
     </Wrapper>
   );
