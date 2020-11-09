@@ -4,7 +4,7 @@ import colors from '../../styles/colors';
 
 export const Container = styled.Text`
   color: ${colors.gray};
-  /* background: ${colors.primary} */
+  background: ${colors.primary};
   font-family: roboto_700;
   font-size: 14px;
   text-transform: uppercase;
