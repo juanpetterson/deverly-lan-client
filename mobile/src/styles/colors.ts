@@ -1,5 +1,5 @@
 export default {
-  primary: '#000014',
+  primary: '#080808',
   black: '#efeff1',
   gray: '#7f7f8b',
   tag: '#323235',
@@ -15,7 +15,7 @@ export default {
  *
  light: {
    primary: '#f7f7f8',
-   black: '#000014',
+   black: '#080808',
    gray: '#3a3a44',
    tag: '#323235',
    green: '#14b866',
@@ -23,7 +23,7 @@ export default {
    purple: '#bf94ff',
  },
  dark: {
-   primary: '#000014',
+   primary: '#080808',
    black: '#efeff1',
    gray: '#7f7f8b',
    tag: '#323235',

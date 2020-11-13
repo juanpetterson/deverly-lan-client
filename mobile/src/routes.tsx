@@ -64,7 +64,7 @@ function Routes(): JSX.Element {
           }}
         />
         <Screen
-          name="favorite"
+          name="Favorite"
           component={ComingSoon}
           options={{
             tabBarLabel: 'Favorite',
