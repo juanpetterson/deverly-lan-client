@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-// import GoogleCast, { CastButton } from 'react-native-google-cast';
+import GoogleCast, { CastButton } from 'react-native-google-cast';
 
-import socket from '../../services/websockets';
 import mediasService from '../../services/mediasService';
 
 import IMedia from '../../models/media.interface';
 import Header from '../../components/Header';
-import Heading from '../../components/Heading';
 import Title from '../../components/Title';
 import CategoryList from '../../components/CategoryList';
 
@@ -25,8 +23,6 @@ const Gallery: React.FC = () => {
   const [currentMedias, setCurrentMedias] = useState<IMedia[]>([]);
 
   useEffect(() => {
-    // GoogleCast.showCastDialog();
-
     const loadMedias = async () => {
       const { data } = await mediasService.getAvailableMedias();
 
@@ -37,16 +33,15 @@ const Gallery: React.FC = () => {
   }, []);
 
   const handleMediaClick = (media: IMedia) => {
-    socket.emit('controller-media-change', media);
+    GoogleCast.castMedia({
+      mediaUrl: `http://192.168.15.177:5000/api/v1/video?media=${media.path}`,
+    });
+
     navigation.navigate('Player');
   };
 
   const { data, indexes } = useMemo(() => {
     const items: Item[] = [
-      {
-        key: 'PAGE_HEADING',
-        render: () => <Heading>Following</Heading>,
-      },
       {
         key: 'FOLLOWED_CATEGORIES',
         render: () => <Title>Followed Categories</Title>,
@@ -107,6 +102,18 @@ const Gallery: React.FC = () => {
 
   return (
     <Wrapper>
+      <CastButton
+        style={{
+          width: 42,
+          height: 42,
+          backgroundColor: 'white',
+          tintColor: 'black',
+          position: 'absolute',
+          bottom: 20,
+          right: 20,
+          zIndex: 1,
+        }}
+      />
       <Container>
         <Header />
         <FlatList<Item>
@@ -115,7 +122,6 @@ const Gallery: React.FC = () => {
           keyExtractor={(item) => item.key}
           stickyHeaderIndices={indexes}
         />
-        {/* <CastButton style={{ width: 30, height: 30 }} /> */}
       </Container>
     </Wrapper>
   );
