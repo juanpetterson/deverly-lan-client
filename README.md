@@ -16,5 +16,3 @@ A media player to execute the medias from your local network (LAN) and control f
 - [ ] Read medias from added folders
 - [ ] Controller design
 - [ ] Player design
-- [ ] Authentication on controller and player
-- [ ] Controll only the authenticated player
