@@ -11,10 +11,8 @@ A media player to execute the medias from your local network (LAN) and control f
 - [x] Change media from controller
 - [x] Gallery of medias
 - [x] Change media from gallery
-- [ ] Cast app to TV
+- [x] Cast app to TV
 - [ ] Add medias folders path
 - [ ] Read medias from added folders
 - [ ] Controller design
 - [ ] Player design
-- [ ] Authentication on controller and player
-- [ ] Controll only the authenticated player
