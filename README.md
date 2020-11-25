@@ -14,5 +14,7 @@ A media player to execute the medias from your local network (LAN) and control f
 - [x] Cast app to TV
 - [ ] Add medias folders path
 - [ ] Read medias from added folders
-- [ ] Controller design
 - [ ] Player design
+- [ ] Casting design
+- [ ] Cast button design
+- [ ] Queue media to play while casting
